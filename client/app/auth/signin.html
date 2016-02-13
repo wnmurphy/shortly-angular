@@ -1,9 +1,8 @@
 <div id='signin'>
   <h1>signin</h1>
-  <form name="signinForm" ng-submit='signin()'>
-    <input type='text'ng-model='user.username'>
-    <input type="password" ng-model='user.password'>
-    <button>signin</button>
-  </form>
+  <input type='text'ng-model='user.username'>
+  <input type="password" ng-model='user.password'>
+  <p ng-if="!(user.username.length > 0 && user.password.length > 0)" ng-click='signin() '> thing? please use.</p>
+  <button ng-if="user.username.length > 0 && user.password.length > 0" ng-click='signin()'>signin</button>
   <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
 </div>

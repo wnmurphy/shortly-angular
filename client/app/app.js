@@ -7,9 +7,6 @@ angular.module('shortly', [
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider
-    // check for auth
-      // on success, next
-      // on fail, redirect to signin
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
