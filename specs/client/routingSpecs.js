@@ -1,4 +1,4 @@
-describe('Routing', function () {
+xdescribe('Routing', function () {
   var $route;
   beforeEach(module('shortly'));
 
