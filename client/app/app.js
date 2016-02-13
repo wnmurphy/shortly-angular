@@ -15,7 +15,32 @@ angular.module('shortly', [
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController'
     })
-    // Your code here
+    .when('/links', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
+    .when('/shorten', {
+      templateUrl: 'app/shorten/shorten.html',
+      controller: 'ShortenController'
+    })
+
+
+
+
+
+
+// Tests:
+  // it('Should have /links route, template, and controller', function () {
+  //   expect($route.routes['/links']).to.be.ok();
+  //   expect($route.routes['/links'].controller).to.be('LinksController');
+  //   expect($route.routes['/links'].templateUrl).to.be('app/links/links.html');
+  // });
+
+  // it('Should have /shorten route, template, and controller', function () {
+  //   expect($route.routes['/shorten']).to.be.ok();
+  //   expect($route.routes['/shorten'].controller).to.be('ShortenController');
+  //   expect($route.routes['/shorten'].templateUrl).to.be('app/shorten/shorten.html');
+
 
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
