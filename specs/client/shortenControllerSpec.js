@@ -1,4 +1,4 @@
-xdescribe('ShortenController', function () {
+describe('ShortenController', function () {
   var $scope, $rootScope, $location, createController, $httpBackend, Links;
 
   // using angular mocks, we can inject the injector
