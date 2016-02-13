@@ -1,4 +1,12 @@
+<div class='navigation'>
+<ul>
+  <li><a href='#/links' class='index'>All Links</a></li>
+  <li><a href='#/shorten' class='create'>Shorten</a></li>
+  <li><a href='#/signin' class='logout'>Logout</a></li>
+</ul>
+</div>
 <div id='container' ng-controller='ShortenController'>
-<!-- Your code here -->
-  <input type='text' ng-model='link'/>
+  <input type='text' ng-model='link.url' ng-change='validate()'/><button ng-hide='isError' ng-click='addLink()'>SUBMIT</button><button ng-show='isError'>INVALID</button>
+
+  <p ng-if="isError">Please enter a valid URL.</p>
 </div>

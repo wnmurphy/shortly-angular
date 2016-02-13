@@ -7,6 +7,9 @@ angular.module('shortly', [
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider
+    // check for auth
+      // on success, next
+      // on fail, redirect to signin
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
@@ -17,31 +20,17 @@ angular.module('shortly', [
     })
     .when('/links', {
       templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      controller: 'LinksController',
+      authenticate: true
     })
     .when('/shorten', {
       templateUrl: 'app/shorten/shorten.html',
-      controller: 'ShortenController'
+      controller: 'ShortenController',
+      authenticate: true
     })
-
-
-
-
-
-
-// Tests:
-  // it('Should have /links route, template, and controller', function () {
-  //   expect($route.routes['/links']).to.be.ok();
-  //   expect($route.routes['/links'].controller).to.be('LinksController');
-  //   expect($route.routes['/links'].templateUrl).to.be('app/links/links.html');
-  // });
-
-  // it('Should have /shorten route, template, and controller', function () {
-  //   expect($route.routes['/shorten']).to.be.ok();
-  //   expect($route.routes['/shorten'].controller).to.be('ShortenController');
-  //   expect($route.routes['/shorten'].templateUrl).to.be('app/shorten/shorten.html');
-
-
+    .otherwise({
+      redirectTo: '/links'
+    });
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');

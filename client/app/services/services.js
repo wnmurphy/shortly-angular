@@ -16,7 +16,6 @@ angular.module('shortly.services', [])
   };
   
   var addLink = function(link){
-       
     $http({
         method: 'POST',
         url: '/api/links',
@@ -32,35 +31,16 @@ angular.module('shortly.services', [])
   };
 
   //regex to validate URL:
-  var validateUrl = function(url){  //<---------does this need to be hoisted?
+  var isValidUrl = function(url){
+    console.log('Validating');
     var validUrlTest =  /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-   
-    var isValid = validUrlTest.test( url );
-    
-    //go see if site actually exists?
-    var siteExists = $http({
-        method: 'GET',
-        url: url
-      }).then(function successCallback(data){
-        if(data.status !== 404 && 
-           data.status !== undefined &&
-           data.status !== null){
-          return true;
-        }
-        return false;
-      }, function errorCallback(err){
-        console.error(err);
-        return false;
-      });
-
-    if(isValid){
-      return siteExists; // <------- might need to invoke here
-    }
-  }; //close validateUrl
+    return validUrlTest.test( url );    
+  }; 
 
   return {
     getLinks: getLinks,
-    addLink: addLink
+    addLink: addLink,
+    isValidUrl: isValidUrl
   };
 
 }) //Factory end
