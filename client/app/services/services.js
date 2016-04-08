@@ -1,41 +1,38 @@
 angular.module('shortly.services', [])
 
 .factory('Links', function ($http) { // Your code here
-  
-  var getLinks = function(linkArray){
+
+  var getLinks = function (linkArray) {
       $http({
         method: 'GET',
         url: '/api/links'
-      }).then(function successCallback(results){
-        for(var i = 0; i < results.data.length; i++){
+      }).then(function successCallback (results) {
+        for (var i = 0; i < results.data.length; i++) {
           linkArray.push(results.data[i]);
         }
-      }, function errorCallback(err){
+      }, function errorCallback(err) {
         console.error(err);
       });
   };
-  
-  var addLink = function(link){
+
+  var addLink = function (link) {
     $http({
         method: 'POST',
         url: '/api/links',
         data: link
-      }).then(function successCallback(data){
+      }).then(function successCallback (data) {
         console.log('addLink gets server response: ' + data.status);
-      }, function errorCallback(err){
+      }, function errorCallback (err) {
         console.error(err);
       });
   };
 
-  var validateLink = function(){
-  };
-
   //regex to validate URL:
-  var isValidUrl = function(url){
+  var isValidUrl = function (url) {
     console.log('Validating');
     var validUrlTest =  /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-    return validUrlTest.test( url );    
-  }; 
+    return validUrlTest.test( url );
+  };
 
   return {
     getLinks: getLinks,
@@ -43,15 +40,8 @@ angular.module('shortly.services', [])
     isValidUrl: isValidUrl
   };
 
-}) //Factory end
+})
 .factory('Auth', function ($http, $location, $window) {
-  // Don't touch this Auth service!!!
-  // it is responsible for authenticating our user
-  // by exchanging the user's username and password
-  // for a JWT from the server
-  // that JWT is then stored in localStorage as 'com.shortly'
-  // after you signin/signup open devtools, click resources,
-  // then localStorage and you'll see your token from the server
   var signin = function (user) {
     return $http({
       method: 'POST',
@@ -82,7 +72,6 @@ angular.module('shortly.services', [])
     $window.localStorage.removeItem('com.shortly');
     $location.path('/signin');
   };
-
 
   return {
     signin: signin,
